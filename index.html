@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hyphen∞or</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.0.0/jszip.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="//cdn.rawgit.com/Stuk/jszip-utils/dfdd631c4249bc495d0c335727ee547702812aa5/dist/jszip-utils.min.js"></script>
+    <!--
+    Mandatory in IE 6, 7, 8 and 9.
+    -->
+    <!--[if IE]>
+      <script type="text/javascript" src="//cdn.rawgit.com/Stuk/jszip-utils/dfdd631c4249bc495d0c335727ee547702812aa5/dist/jszip-utils-ie.min.js"></script>
+    <![endif]-->
+    <script src="//cdn.rawgit.com/paroga/cbor-js/dca0855fd71ee9e480881e6e1bccce6591ffa67b/cbor.js" charset="utf-8"></script>
+    <script src="//twopointzero.us/code/grep/api.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/native-promise-only/0.8.1/npo.js" charset="utf-8"></script>
+    <script src="matcher.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <h1>Hyphen∞or: don&rsquo;t end up like <a href="http://s.tk/hyphen">hyphen</a></h1>
+    <label>Domain name (no TLD): <input class="name" value="expertsexchange"></label>
+    <label>Min word length (increase for faster matches) <input class="length" type="number" value="2"</label>
+    <ul></ul>
+    <script>
+      $('input').on('keyup', function(event) {
+        if (event.which !== 13) return; // enter
+        var $ul = $('ul');
+        $ul.empty().text('Loading...');
+        var val = $('.name').val().toLowerCase().replace(/[^a-z]/g, '');
+        match(val, +$('.length').val()).then(function(matches) {
+          $ul.empty();
+          matches.unshift([val]);
+          matches.forEach(function(segments) {
+            $ul.append($('<li>').text(segments.join(' ')));
+          });
+        }, function(err) {
+          console.error(err);
+        });
+      });
+    </script>
+  </body>
+</html>
