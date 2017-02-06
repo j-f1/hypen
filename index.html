@@ -18,13 +18,26 @@
     <script src="/grep/api.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/native-promise-only/0.8.1/npo.js" charset="utf-8"></script>
     <script src="matcher.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="/util.css">
+    <link rel="stylesheet" href="https://j-f1.github.io/util.css">
+    <style>
+      main {
+        font-size: 0.5em;
+      }
+      h1 {
+        font-size: 1.25em;
+      }
+      label {
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hyphen∞or: don&rsquo;t end up like <a href="http://s.tk/hyphen">hyphen</a></h1>
-    <label>Domain name (no TLD): <input class="name" placeholder="experts-exchange"></label>
-    <label>Min word length (increase for faster matches) <input class="length" type="number" value="2"</label>
-    <ul></ul>
+    <main>
+      <h1>Hyphen∞or: don&rsquo;t end up like <a href="http://s.tk/hyphen">hyphen</a></h1>
+      <label>Domain name (no TLD): <input class="name input" placeholder="experts-exchange"></label>
+      <label>Min word length (increase for faster matches) <input class="length input" type="number" value="2"</label>
+      <ul></ul>
+    </main>
     <script>
       $('input').on('keyup', function(event) {
         if (event.which !== 13) return; // enter
